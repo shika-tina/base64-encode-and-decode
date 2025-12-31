@@ -2,10 +2,10 @@ import base64
 import os
 
 def convert_file_to_base64():
-    # 1. 提示使用者輸入檔案路徑
+    # 提示使用者輸入檔案路徑
     file_path = input("base64編碼\n請輸入檔案全域位置 (例如 C:/data/test.txt 或 /home/user/test.txt): ").strip()
     
-    # 移除使用者可能誤輸入的引號 (拖曳檔案進終端機時常會帶有引號)
+    # 移除使用者可能誤輸入的引號
     file_path = file_path.replace('"', '').replace("'", "")
 
     # 檢查檔案是否存在
@@ -19,13 +19,13 @@ def convert_file_to_base64():
         file_full_name = os.path.basename(file_path)
         file_name, file_ext = os.path.splitext(file_full_name)
 
-        # 2. 讀取原始檔案並進行 Base64 編碼
+        # 讀取原始檔案並進行 Base64 編碼
         with open(file_path, "rb") as f:
             file_content = f.read()
             base64_bytes = base64.b64encode(file_content)
             base64_string = base64_bytes.decode("utf-8")
 
-        # 3. 在終端機顯示結果 (若檔案太大建議只顯示前 100 字元)
+        # 在終端機顯示結果 (若檔案太大只顯示前 200 字元)
         print("\n--- 轉換結果 ---")
         if len(base64_string) > 200:
             print(base64_string[:200] + " ... (內容過長，已省略後續顯示)")
@@ -33,7 +33,7 @@ def convert_file_to_base64():
             print(base64_string)
         print("----------------\n")
 
-        # 4. 儲存到相同的資料夾
+        # 儲存到相同的資料夾
         output_filename = f"{file_name}_en64.txt"
         output_path = os.path.join(folder_path, output_filename)
 
