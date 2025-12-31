@@ -7,10 +7,10 @@ Base64 encoding is commonly used in data transmission, especially when dealing w
 # Usage
 Before running the scripts, you need to install the required Python packages, including python-magic and python-magic-bin
 
-    `pip install python-magic python-magic-bin`
+    pip install python-magic python-magic-bin
 or download the requirements.txt and type  
 
-    `pip install -r requirements.txt`
+    pip install -r requirements.txt
 1. Base64 Encoding
 To encode a file (inscluding images, txt etc...) into Base64, run the following command:
 
