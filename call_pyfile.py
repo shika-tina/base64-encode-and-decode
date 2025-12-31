@@ -1,3 +1,4 @@
+# 此檔案只是整合前兩個腳本而已，並非必須
 from base64_decode import convert_base64_to_file as de64
 from base64_encode import convert_file_to_base64 as en64
 if __name__ == "__main__":
