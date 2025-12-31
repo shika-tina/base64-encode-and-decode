@@ -2,7 +2,7 @@ import base64
 import os
 try:
     import magic
-    # Windows 使用者需要確保 python-magic-bin 也安裝了
+    # 需要確保 python-magic-bin 也安裝了
     magic_instance = magic.Magic(mime=True)
 except ImportError:
     print("警告：缺少 python-magic 庫，將使用基本檔案類型判斷。")
@@ -72,9 +72,9 @@ mime_map = {
 
     # --- 執行檔與系統檔 ---
     'application/x-msdownload': '.exe',
-    'application/x-dosexec': '.exe',        # 解決你遇到的 GitHub Desktop 問題
-    'application/x-msdos-program': '.exe',  # 傳統 DOS/Windows 程序
-    'application/x-msi': '.msi',            # Windows 安裝套件
+    'application/x-dosexec': '.exe',
+    'application/x-msdos-program': '.exe',
+    'application/x-msi': '.msi',
     'application/x-apple-diskimage': '.dmg',# macOS 磁碟映像
     'application/x-sh': '.sh',              # Shell Script
     'application/x-executable': '.bin',      # Linux 執行檔
@@ -89,11 +89,11 @@ mime_map = {
 
 
 def convert_base64_to_file():
-    # 1. 提示使用者輸入檔案路徑
+    # 輸入檔案路徑
     # .strip()去除首尾空格
     file_path = input("base64解碼\n請輸入檔案全域位置 (例如 C:/data/test.txt 或 /home/user/test.txt): ").strip()
     
-    # 移除使用者可能誤輸入的引號 (拖曳檔案進終端機時常會帶有引號)
+    # 移除使用者可能誤輸入的引號
     file_path = file_path.replace('"', '').replace("'", "")
 
     # 檢查檔案是否存在
@@ -110,8 +110,8 @@ def convert_base64_to_file():
         # 2. 讀取原始檔案並進行 Base64 解碼
         # open()第二個參數決定對待檔案的方式, r=read, w=write, b以位元組型態, rb以位元組型態讀入, wb以位元組型態寫入(例如圖片)
         # f 變數只是檔案控制握把
-        # file_content, base64_bytes 皆是 bytes型態，但其內容不一樣
-        # Base64 會把原始資料每 3 個 Byte 一組，重新切分成 4 個 Byte，並且對照 Base64 表格 換成特定的字元
+        # file_content, base64_bytes皆是bytes型態，但其內容不一樣
+        # Base64會把原始資料每3個Byte一組，重新切分成4個Byte，並且對照Base64表格換成特定的字元
         with open(file_path, "rb") as f:
             file_content = f.read()
             base64_bytes = base64.b64decode(file_content)
@@ -123,7 +123,7 @@ def convert_base64_to_file():
         # 從清單中尋找
         doc_type = mime_map.get(mime_type)
 
-        # 3. 在終端機顯示結果
+        # 在終端機顯示結果
         print("\n--- 轉換結果 ---")
         if doc_type:
             if doc_type == '.txt':
@@ -141,7 +141,7 @@ def convert_base64_to_file():
             print(f"內容為二進位格式({doc_type})，無法以文字預覽")
         print("----------------\n")
 
-        # 4. 儲存到相同的資料夾
+        # 儲存到相同的資料夾
         output_filename = f"{file_name}_de64{doc_type}"
         output_path = os.path.join(folder_path, output_filename)
 
