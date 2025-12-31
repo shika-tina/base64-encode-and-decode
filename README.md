@@ -11,7 +11,7 @@ or download the requirements.txt and type
     pip install -r requirements.txt
 1. Base64 Encoding
 To encode a file (inscluding images, txt etc...) into Base64, run the following command:
-    '''python base64_encode.py
+    \n  python base64_encode.py
 3. Base64 Decoding
 To decode a Base64 encoded file, use the following command:
     python base64_decode.py
